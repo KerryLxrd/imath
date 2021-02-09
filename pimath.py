@@ -103,7 +103,7 @@ try:
 		if(command == 'cls' or command == 'clear'):
 			os.system('cls')
 
-		if(command == '1'):
+		if(command == 'continue' or command == '1'):
 			rand = ['plus', 'minus']
 			if(choice(rand) == 'plus'):
 				commandplus()
