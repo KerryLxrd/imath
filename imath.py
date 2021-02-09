@@ -29,9 +29,12 @@ def diffs():
 		print(expressions[3])
 
 def info():
-	print('\ndiffs plus - вкл/выкл примеры с плюсом.')
-	print('diffs minus - вкл/выкл примеры с минусом.')
-	print('Чтобы продолжить решать примеры напишите 1')
+	print('\n"info" - просмотр команд')
+	print('"continue" - продолжить решение задач')
+	print('"diffs" - просмотр включенных/выключенных задач')
+	print('"diffs plus" - включение/выключение задач с плюсом')
+	print('"diffs minus" - включение/выключение задач с минусом')
+	print('"cls" - очистка программы от строк')
 
 def commandplus():
 	a = randint(distance1, distance2)
