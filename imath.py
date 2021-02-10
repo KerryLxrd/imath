@@ -1,17 +1,20 @@
 # by https://vk.com/k3rry1xrd/
 
-import os
+import os, time
 from random import randint, choice
 
 valueplus = 1
 valueminus = 1
 
-distance1 = 100
-distance2 = 1000
+distance1 = 10
+distance2 = 100
 
 expressions = ['Примеры с плюсом - включены!', 'Примеры с плюсом - выключены!', 'Примеры с минусом - включены!', 'Примеры с минусом - выключены!'] 
 
 username = os.environ.get("USERNAME")
+
+def getUnix():
+	return round(time.time())
 
 def diffs():
 	if(valueplus == 1 and valueminus == 1):
@@ -33,23 +36,25 @@ def info():
 	print('"diffs" - просмотр включенных/выключенных задач')
 	print('"diffs plus" - включение/выключение задач с плюсом')
 	print('"diffs minus" - включение/выключение задач с минусом')
-	print('"cls" - очистка программы от строк')
 	print('"distance" - просмотр диапозона чисел в данный момент')
 	print('"distance change" - редактирование значение диапозона')
- 
+	print('"cls" - очистка программы от строк')
+
 def commandplus():
 	a = randint(distance1, distance2)
 	b = randint(distance1, distance2)
 	if(valueplus == 1):
 		result = a + b
 		print(str(a) + ' + '+ str(b))
+		start_time = time.time()
 		answer = input('>')
 		while answer != result:
 			if(str(answer) == 'ответ'):
-				print('\nОтвет - ' + str(result))	
+				print('\nОтвет - ' + str(result))
 				break
 			if(int(answer) == result):
 				print('\nПравильно! Ответ - ' + str(result))
+				print('Время: ' + str(int((time.time() - start_time))) + ' сек.')
 				break
 			else:
 				print('Не правильно! Чтобы посмотреть ответ напишите \"ответ\"')		
@@ -63,13 +68,15 @@ def commandminus():
 	if(valueminus == 1):
 		result = a - b
 		print(str(a) + ' - '+ str(b))
+		start_time = time.time()
 		answer = input('>')
 		while answer != result:
 			if(str(answer) == 'ответ'):
-				print('\nОтвет - ' + str(result))	
+				print('\nОтвет - ' + str(result))
 				break
 			if(int(answer) == result):
 				print('\nПравильно! Ответ - ' + str(result))
+				print('Время: ' + str(int((time.time() - start_time))) + ' сек.')
 				break
 			else:
 				print('\nНе правильно! Чтобы посмотреть ответ напишите \"ответ\"\n')		
@@ -81,51 +88,44 @@ info()
 
 def distance():
 	global distance1, distance2
-	distance1 = int(input('1: '))
-	distance2 = int(input('2: '))
+	distance1 = int(input('Первое число в диапозоне: '))
+	distance2 = int(input('Второе число в диапозоне: '))
 	print('Ваш диапозон чисел теперь с ' + str(distance1) + ' по ' + str(distance2))
 
 try:
 	while True:
 		print('')
-		command = input(username + '>')
-
+		command = input('imath\\' + username + '>')
 		if(command == 'diffs plus' and valueplus == 0):
 			valueplus = 1
 			print('\n' + expressions[0] + '\n')
 		elif(command == 'diffs plus' and valueplus == 1):
 			valueplus = 0
 			print('\n' + expressions[1] + '\n')
-
-		if(command == 'diffs minus' and valueminus == 0):
+		elif(command == 'diffs minus' and valueminus == 0):
 			valueminus = 1
 			print('\n' + expressions[2] + '')
 		elif(command == 'diffs minus' and valueminus == 1):
 			valueminus = 0
 			print('\n' + expressions[3] + '')		
-
-		if(command == 'diffs'):
+		elif(command == 'diffs'):
 			diffs()
-
-		if(command == 'info'):
+		elif(command == 'info'):
 			info()
-
-		if(command == 'cls' or command == 'clear'):
+		elif(command == 'cls' or command == 'clear'):
 			os.system('cls')
-
-		if(command == 'distance change'):
+		elif(command == 'distance change'):
 			distance()
-
-		if(command == 'distance'):
+		elif(command == 'distance'):
 			print('Ваш диапозон чисел в данный момент с ' + str(distance1) + ' по ' + str(distance2))
-
-		if(command == 'continue' or command == '1'):
+		elif(command == 'continue' or command == '1'):
 			rand = ['plus', 'minus']
 			if(choice(rand) == 'plus'):
 				commandplus()
 			else:
 				commandminus()
-
+		else:
+			print('"' + command + '" не является внутренней или внешней командой, исполняемой программой')
 except Exception as a:
 	print(str(a))
 
