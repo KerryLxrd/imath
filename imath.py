@@ -4,7 +4,6 @@ import os
 from random import randint, choice
 
 valueplus = 1
-
 valueminus = 1
 
 distance1 = 100
@@ -35,7 +34,9 @@ def info():
 	print('"diffs plus" - включение/выключение задач с плюсом')
 	print('"diffs minus" - включение/выключение задач с минусом')
 	print('"cls" - очистка программы от строк')
-
+	print('"distance" - просмотр диапозона чисел в данный момент')
+	print('"distance change" - редактирование значение диапозона')
+ 
 def commandplus():
 	a = randint(distance1, distance2)
 	b = randint(distance1, distance2)
@@ -78,6 +79,12 @@ def commandminus():
 
 info()
 
+def distance():
+	global distance1, distance2
+	distance1 = int(input('1: '))
+	distance2 = int(input('2: '))
+	print('Ваш диапозон чисел теперь с ' + str(distance1) + ' по ' + str(distance2))
+
 try:
 	while True:
 		print('')
@@ -105,6 +112,12 @@ try:
 
 		if(command == 'cls' or command == 'clear'):
 			os.system('cls')
+
+		if(command == 'distance change'):
+			distance()
+
+		if(command == 'distance'):
+			print('Ваш диапозон чисел в данный момент с ' + str(distance1) + ' по ' + str(distance2))
 
 		if(command == 'continue' or command == '1'):
 			rand = ['plus', 'minus']
