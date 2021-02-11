@@ -6,12 +6,17 @@ from random import randint, choice
 valueplus = 1
 valueminus = 1
 
+timer = 1
+
 distance1 = 10
 distance2 = 100
 
 expressions = ['Примеры с плюсом - включены!', 'Примеры с плюсом - выключены!', 'Примеры с минусом - включены!', 'Примеры с минусом - выключены!'] 
 
 username = os.environ.get("USERNAME")
+
+# TODO
+# цвета, выключение/включение таймера, изменить команду distance (distance 1 10)
 
 def diffs():
 	if(valueplus == 1 and valueminus == 1):
@@ -35,6 +40,7 @@ def info():
 	print('"diffs minus" - включение/выключение задач с минусом')
 	print('"distance" - просмотр диапозона чисел в данный момент')
 	print('"distance change" - редактирование значение диапозона')
+	print('"timer" - вкл/выкл таймер')
 	print('"cls" - очистка программы от строк')
 
 def commandplus():
@@ -51,7 +57,8 @@ def commandplus():
 				break
 			if(int(answer) == result):
 				print('\nПравильно! Ответ - ' + str(result))
-				print('Время: ' + str(int((time.time() - start_time))) + ' сек.')
+				if(timer == 1):
+					print('Время: ' + str(int((time.time() - start_time))) + ' сек.')
 				break
 			else:
 				print('Не правильно! Чтобы посмотреть ответ напишите \"ответ\"')		
@@ -73,7 +80,8 @@ def commandminus():
 				break
 			if(int(answer) == result):
 				print('\nПравильно! Ответ - ' + str(result))
-				print('Время: ' + str(int((time.time() - start_time))) + ' сек.')
+				if(timer == 1):
+					print('Время: ' + str(int((time.time() - start_time))) + ' сек.')
 				break
 			else:
 				print('\nНе правильно! Чтобы посмотреть ответ напишите \"ответ\"\n')		
@@ -93,29 +101,35 @@ try:
 	while True:
 		print('')
 		command = input('imath\\' + username + '>')
-		if(command == 'diffs plus' and valueplus == 0):
+		if(command.lower() == 'diffs plus' and valueplus == 0):
 			valueplus = 1
 			print('\n' + expressions[0] + '\n')
-		elif(command == 'diffs plus' and valueplus == 1):
+		elif(command.lower() == 'diffs plus' and valueplus == 1):
 			valueplus = 0
 			print('\n' + expressions[1] + '\n')
-		elif(command == 'diffs minus' and valueminus == 0):
+		elif(command.lower() == 'diffs minus' and valueminus == 0):
 			valueminus = 1
 			print('\n' + expressions[2] + '')
-		elif(command == 'diffs minus' and valueminus == 1):
+		elif(command.lower() == 'diffs minus' and valueminus == 1):
 			valueminus = 0
 			print('\n' + expressions[3] + '')		
-		elif(command == 'diffs'):
+		elif(command.lower() == 'diffs'):
 			diffs()
-		elif(command == 'info'):
+		elif(command.lower() == 'info'):
 			info()
-		elif(command == 'cls' or command == 'clear'):
+		elif(command.lower() == 'cls' or command.lower() == 'clear'):
 			os.system('cls')
-		elif(command == 'distance change'):
+		elif(command.lower() == 'distance change'):
 			distance()
-		elif(command == 'distance'):
+		elif(command.lower() == 'distance'):
 			print('Ваш диапозон чисел в данный момент с ' + str(distance1) + ' по ' + str(distance2))
-		elif(command == 'continue' or command == '1'):
+		elif(command.lower() == 'timer' and timer == 0):
+			timer = 1
+			print('Таймер включен!')
+		elif(command.lower() == 'timer' and timer == 1):
+			timer = 0
+			print('Таймер выключен!')
+		elif(command.lower() == 'continue' or command == '1'):
 			rand = ['plus', 'minus']
 			if(choice(rand) == 'plus'):
 				commandplus()
