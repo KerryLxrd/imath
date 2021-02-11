@@ -15,9 +15,6 @@ expressions = ['Примеры с плюсом - включены!', 'Приме
 
 username = os.environ.get("USERNAME")
 
-# TODO
-# цвета, выключение/включение таймера, изменить команду distance (distance 1 10)
-
 def diffs():
 	if(valueplus == 1 and valueminus == 1):
 		print('\n' + expressions[0])
