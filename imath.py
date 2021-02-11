@@ -13,9 +13,6 @@ expressions = ['Примеры с плюсом - включены!', 'Приме
 
 username = os.environ.get("USERNAME")
 
-def getUnix():
-	return round(time.time())
-
 def diffs():
 	if(valueplus == 1 and valueminus == 1):
 		print('\n' + expressions[0])
